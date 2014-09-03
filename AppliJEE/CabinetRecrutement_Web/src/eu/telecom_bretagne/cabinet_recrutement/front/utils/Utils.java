@@ -45,7 +45,10 @@ public class Utils
 	 */
 	public static String date2String(Date uneDate)
 	{
-		return formatDeDate.format(uneDate);
+		if(uneDate == null)
+			return "[aucune date]";
+		else
+			return formatDeDate.format(uneDate);
 	}
 	//-----------------------------------------------------------------------------
 	/**

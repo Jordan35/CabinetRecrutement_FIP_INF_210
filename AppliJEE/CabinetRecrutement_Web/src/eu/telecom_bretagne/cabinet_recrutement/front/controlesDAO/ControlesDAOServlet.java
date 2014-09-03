@@ -54,6 +54,7 @@ public class ControlesDAOServlet extends HttpServlet
 		out.println();
 		
 		// Contrôle(s) de fonctionnalités.
+		
 		out.println("Liste des entreprises :");
 		List<Entreprise> entreprises = entrepriseDAO.findAll();
 		
