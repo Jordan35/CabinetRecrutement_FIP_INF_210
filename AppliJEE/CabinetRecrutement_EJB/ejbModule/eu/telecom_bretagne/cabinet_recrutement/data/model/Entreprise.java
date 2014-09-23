@@ -15,7 +15,7 @@ public class Entreprise implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ENTREPRISE_ID_GENERATOR", sequenceName="ENTREPRISE_ID_SEQ")
+	@SequenceGenerator(name="ENTREPRISE_ID_GENERATOR", sequenceName="ENTREPRISE_ID_SEQ", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ENTREPRISE_ID_GENERATOR")
 	private Integer id;
 
@@ -28,7 +28,7 @@ public class Entreprise implements Serializable {
 
 	//bi-directional many-to-one association to OffreEmploi
 	@OneToMany(mappedBy="entreprise", fetch=FetchType.EAGER)
-	private Set<OffreEmploi> offreEmplois;
+	private Set<OffreEmploi> offresEmploi;
 
 	public Entreprise() {
 	}
@@ -66,11 +66,11 @@ public class Entreprise implements Serializable {
 	}
 
 	public Set<OffreEmploi> getOffresEmploi() {
-		return this.offreEmplois;
+		return this.offresEmploi;
 	}
 
 	public void setOffresEmploi(Set<OffreEmploi> offreEmplois) {
-		this.offreEmplois = offreEmplois;
+		this.offresEmploi = offreEmplois;
 	}
 
 	public OffreEmploi addOffreEmploi(OffreEmploi offreEmploi) {
@@ -86,5 +86,11 @@ public class Entreprise implements Serializable {
 
 		return offreEmploi;
 	}
+
+  @Override
+  public String toString()
+  {
+    return "Entreprise [id=" + id + ", nom=" + nom + ", adressePostale=" + adressePostale + "]";
+  }
 
 }

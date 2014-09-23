@@ -16,7 +16,7 @@ public class MessageOffreEmploi implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="MESSAGE_OFFRE_EMPLOI_ID_GENERATOR", sequenceName="MESSAGE_OFFRE_EMPLOI_ID_SEQ")
+	@SequenceGenerator(name="MESSAGE_OFFRE_EMPLOI_ID_GENERATOR", sequenceName="MESSAGE_OFFRE_EMPLOI_ID_SEQ", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="MESSAGE_OFFRE_EMPLOI_ID_GENERATOR")
 	private Integer id;
 
@@ -78,5 +78,11 @@ public class MessageOffreEmploi implements Serializable {
 	public void setOffreEmploi(OffreEmploi offreEmploi) {
 		this.offreEmploi = offreEmploi;
 	}
+
+  @Override
+  public String toString()
+  {
+    return "MessageOffreEmploi [id=" + id + ", corps=" + corps + ", dateEnvoi=" + dateEnvoi + "]";
+  }
 
 }

@@ -16,7 +16,7 @@ public class Candidature implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="CANDIDATURE_ID_GENERATOR", sequenceName="CANDIDATURE_ID_SEQ")
+	@SequenceGenerator(name="CANDIDATURE_ID_GENERATOR", sequenceName="CANDIDATURE_ID_SEQ", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CANDIDATURE_ID_GENERATOR")
 	private Integer id;
 
@@ -136,7 +136,7 @@ public class Candidature implements Serializable {
 		return this.messagesCandidature;
 	}
 
-	public void setMessagesCandidature(Set<MessageCandidature> messageCandidatures) {
+	public void setMessageCandidatures(Set<MessageCandidature> messageCandidatures) {
 		this.messagesCandidature = messageCandidatures;
 	}
 
@@ -158,7 +158,7 @@ public class Candidature implements Serializable {
 		return this.messagesOffreEmploi;
 	}
 
-	public void setMessagesOffreEmploi(Set<MessageOffreEmploi> messageOffreEmplois) {
+	public void setMessageOffreEmplois(Set<MessageOffreEmploi> messageOffreEmplois) {
 		this.messagesOffreEmploi = messageOffreEmplois;
 	}
 
@@ -183,5 +183,11 @@ public class Candidature implements Serializable {
 	public void setSecteursActivite(Set<SecteurActivite> secteurActivites) {
 		this.secteursActivite = secteurActivites;
 	}
+
+  @Override
+  public String toString()
+  {
+    return "Candidature [id=" + id + ", nom=" + nom + ", prenom=" + prenom + "]";
+  }
 
 }

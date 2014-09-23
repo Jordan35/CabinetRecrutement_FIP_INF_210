@@ -16,7 +16,7 @@ public class SecteurActivite implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SECTEUR_ACTIVITE_ID_GENERATOR", sequenceName="SECTEUR_ACTIVITE_ID_SEQ")
+	@SequenceGenerator(name="SECTEUR_ACTIVITE_ID_GENERATOR", sequenceName="SECTEUR_ACTIVITE_ID_SEQ", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SECTEUR_ACTIVITE_ID_GENERATOR")
 	private Integer id;
 
@@ -46,7 +46,7 @@ public class SecteurActivite implements Serializable {
 			@JoinColumn(name="id_offre_emploi")
 			}
 		)
-	private Set<OffreEmploi> offreEmplois;
+	private Set<OffreEmploi> offresEmploi;
 
 	public SecteurActivite() {
 	}
@@ -76,11 +76,17 @@ public class SecteurActivite implements Serializable {
 	}
 
 	public Set<OffreEmploi> getOffresEmploi() {
-		return this.offreEmplois;
+		return this.offresEmploi;
 	}
 
 	public void setOffresEmploi(Set<OffreEmploi> offreEmplois) {
-		this.offreEmplois = offreEmplois;
+		this.offresEmploi = offreEmplois;
 	}
+
+  @Override
+  public String toString()
+  {
+    return "SecteurActivite [id=" + id + ", intitule=" + intitule + "]";
+  }
 
 }

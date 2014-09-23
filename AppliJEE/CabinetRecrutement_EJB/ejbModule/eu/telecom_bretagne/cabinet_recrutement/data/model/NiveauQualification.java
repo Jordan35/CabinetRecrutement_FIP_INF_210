@@ -16,7 +16,7 @@ public class NiveauQualification implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="NIVEAU_QUALIFICATION_ID_GENERATOR", sequenceName="NIVEAU_QUALIFICATION_ID_SEQ")
+	@SequenceGenerator(name="NIVEAU_QUALIFICATION_ID_GENERATOR", sequenceName="NIVEAU_QUALIFICATION_ID_SEQ", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="NIVEAU_QUALIFICATION_ID_GENERATOR")
 	private Integer id;
 
@@ -28,7 +28,7 @@ public class NiveauQualification implements Serializable {
 
 	//bi-directional many-to-one association to OffreEmploi
 	@OneToMany(mappedBy="niveauQualification", fetch=FetchType.EAGER)
-	private Set<OffreEmploi> offreEmplois;
+	private Set<OffreEmploi> offresEmploi;
 
 	public NiveauQualification() {
 	}
@@ -71,26 +71,32 @@ public class NiveauQualification implements Serializable {
 		return candidature;
 	}
 
-	public Set<OffreEmploi> getOffreEmplois() {
-		return this.offreEmplois;
+	public Set<OffreEmploi> getOffresEmploi() {
+		return this.offresEmploi;
 	}
 
-	public void setOffreEmplois(Set<OffreEmploi> offreEmplois) {
-		this.offreEmplois = offreEmplois;
+	public void setOffresEmploi(Set<OffreEmploi> offreEmplois) {
+		this.offresEmploi = offreEmplois;
 	}
 
 	public OffreEmploi addOffreEmploi(OffreEmploi offreEmploi) {
-		getOffreEmplois().add(offreEmploi);
+		getOffresEmploi().add(offreEmploi);
 		offreEmploi.setNiveauQualification(this);
 
 		return offreEmploi;
 	}
 
 	public OffreEmploi removeOffreEmploi(OffreEmploi offreEmploi) {
-		getOffreEmplois().remove(offreEmploi);
+		getOffresEmploi().remove(offreEmploi);
 		offreEmploi.setNiveauQualification(null);
 
 		return offreEmploi;
 	}
+
+  @Override
+  public String toString()
+  {
+    return "NiveauQualification [id=" + id + ", intitule=" + intitule + "]";
+  }
 
 }

@@ -17,7 +17,7 @@ public class OffreEmploi implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="OFFRE_EMPLOI_ID_GENERATOR", sequenceName="OFFRE_EMPLOI_ID_SEQ")
+	@SequenceGenerator(name="OFFRE_EMPLOI_ID_GENERATOR", sequenceName="OFFRE_EMPLOI_ID_SEQ", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="OFFRE_EMPLOI_ID_GENERATOR")
 	private Integer id;
 
@@ -52,7 +52,7 @@ public class OffreEmploi implements Serializable {
 	private NiveauQualification niveauQualification;
 
 	//bi-directional many-to-many association to SecteurActivite
-	@ManyToMany(mappedBy="offreEmplois", fetch=FetchType.EAGER)
+	@ManyToMany(mappedBy="offresEmploi", fetch=FetchType.EAGER)
 	private Set<SecteurActivite> secteursActivite;
 
 	public OffreEmploi() {
@@ -102,7 +102,7 @@ public class OffreEmploi implements Serializable {
 		return this.messagesCandidature;
 	}
 
-	public void setMessagesCandidature(Set<MessageCandidature> messageCandidatures) {
+	public void setMessageCandidatures(Set<MessageCandidature> messageCandidatures) {
 		this.messagesCandidature = messageCandidatures;
 	}
 
@@ -124,7 +124,7 @@ public class OffreEmploi implements Serializable {
 		return this.messagesOffreEmploi;
 	}
 
-	public void setMessagesOffreEmploi(Set<MessageOffreEmploi> messageOffreEmplois) {
+	public void setMessageOffreEmplois(Set<MessageOffreEmploi> messageOffreEmplois) {
 		this.messagesOffreEmploi = messageOffreEmplois;
 	}
 
@@ -165,5 +165,11 @@ public class OffreEmploi implements Serializable {
 	public void setSecteursActivite(Set<SecteurActivite> secteurActivites) {
 		this.secteursActivite = secteurActivites;
 	}
+
+  @Override
+  public String toString()
+  {
+    return "OffreEmploi [id=" + id + ", titre=" + titre + ", dateDepot=" + dateDepot + "]";
+  }
 
 }
