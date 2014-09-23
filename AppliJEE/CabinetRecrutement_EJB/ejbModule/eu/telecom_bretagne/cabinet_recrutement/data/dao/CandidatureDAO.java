@@ -52,7 +52,12 @@ public class CandidatureDAO
 	 */
 	public Candidature findById(Integer id)
 	{
-		return entityManager.find(Candidature.class, id);
+		//return entityManager.find(Candidature.class, id);
+		
+    // 23/09/2014 : voir commentaire de OffreEmploiDAO, findById(Integer id).
+    Candidature candidature = entityManager.find(Candidature.class, id);
+    entityManager.refresh(candidature);
+    return candidature;
 	}
 	//----------------------------------------------------------------------------
   /**
@@ -97,8 +102,7 @@ public class CandidatureDAO
 	 */
 	public Candidature update(Candidature candidature)
 	{
-		entityManager.merge(candidature);
-		return findById(candidature.getId());
+		return entityManager.merge(candidature);
 	}
 	//-----------------------------------------------------------------------------
 	/**

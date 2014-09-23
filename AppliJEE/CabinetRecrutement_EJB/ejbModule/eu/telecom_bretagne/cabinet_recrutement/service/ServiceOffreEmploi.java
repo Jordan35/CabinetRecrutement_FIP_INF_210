@@ -77,7 +77,7 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi
 		offreEmploi.setNiveauQualification(niveauQualificationDAO.findById(idNiveauQualification));
 		
 		// Intanciation du nouveau set (vide pour le moment !).
-		offreEmploi.setSecteursActivite(new HashSet<SecteurActivite>()); 
+		offreEmploi.setSecteursActivite(new HashSet<SecteurActivite>());
 		
 		// Parcours de l'ensemble des SA
 		for(int id : idsSecteursActivite)
@@ -85,20 +85,20 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi
 			// Récup
 			SecteurActivite secteur = secteurActiviteDAO.findById(id);
 			
+      // Ajout de l'offre d'emploi au secteur
+      secteur.getOffresEmploi().add(offreEmploi);
+      
 			// Le secteur est ajouté à l'offre
 			offreEmploi.getSecteursActivite().add(secteur);
-			
-			// Ajout de l'offre d'emploi au secteur
-			secteur.getOffresEmploi().add(offreEmploi);
-			
+      
 			// Mise à jour (le set a été modifié). --> mise à jour de la table
 			// d'association dans la BD.
 			secteurActiviteDAO.update(secteur);
 		}
-		
+
 		// Persistance de la nouvelle offre...
 		offreEmploi = offreEmploiDAO.persist(offreEmploi);
-		
+
 		return offreEmploi;
 	}
 	//-----------------------------------------------------------------------------

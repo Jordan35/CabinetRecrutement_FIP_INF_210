@@ -46,7 +46,15 @@ public class OffreEmploiDAO
 	//----------------------------------------------------------------------------
 	public OffreEmploi findById(Integer id)
 	{
-		return entityManager.find(OffreEmploi.class, id);
+		//return entityManager.find(OffreEmploi.class, id);
+	  
+	  // 23/09/2014 return entityManager.find(OffreEmploi.class, id); fonctionne mais
+	  // après une insertion ne renvoie pas correctement la liste des secteurs d'activité
+	  // associée : la méthode refresh met à jour les données managées avec les données
+	  // de la base.
+	  OffreEmploi offreEmploi = entityManager.find(OffreEmploi.class, id);
+		entityManager.refresh(offreEmploi);
+	  return offreEmploi;
 	}
 	//----------------------------------------------------------------------------
   @SuppressWarnings("unchecked")
@@ -79,8 +87,7 @@ public class OffreEmploiDAO
 	//-----------------------------------------------------------------------------
 	public OffreEmploi update(OffreEmploi offreEmploi)
 	{
-		entityManager.merge(offreEmploi);
-		return findById(offreEmploi.getId());
+		return entityManager.merge(offreEmploi);
 	}
 	//-----------------------------------------------------------------------------
 	public void remove(OffreEmploi offreEmploi)
